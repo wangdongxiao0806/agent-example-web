@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="agentInterceptor" class="com.wdx.middleware.aop.AgentAopInterceptor"></bean>
+    <!-- proxy-target-class=false为jdk动态代理代理 -->
+    <aop:config proxy-target-class="false">
+        <!-- 拦截 -->
+        <aop:aspect ref="agentInterceptor">
+            <aop:pointcut id="agentPointcut" expression="execution(* com.wdx.example.service.impl..*.*(..))" />
+            <aop:around pointcut-ref="agentPointcut" method="proceed" />
+        </aop:aspect>
+    </aop:config>
+</beans>
