@@ -7,7 +7,9 @@
 
     <aop:aspectj-autoproxy/>
 
-    <bean id="agentInterceptor" class="com.wdx.middleware.aop.AgentAopInterceptor"></bean>
+    <bean id="agentInterceptor" class="com.wdx.middleware.aop.AgentAopInterceptor">
+        <property name="cacheModel" value="memory"></property>
+    </bean>
     <!-- proxy-target-class=false为jdk动态代理代理 -->
     <aop:config proxy-target-class="false">
         <!-- 拦截 -->
